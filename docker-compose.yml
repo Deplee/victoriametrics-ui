@@ -1,0 +1,11 @@
+services:
+  vm-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_DEFAULT_SELECT_NODES=${VM_SELECT_NODES:-http://10.141.200.38:8482}
+      - VITE_DEFAULT_ACCOUNT_ID=${VITE_DEFAULT_ACCOUNT_ID:-0}
+    restart: unless-stopped
