@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { VMQueryResult, VMSeriesResult, VMLabelsResult, VMLabelValuesResult, TimeRange } from '../types';
 
-// Конфигурация по умолчанию
 const getDefaultSelectNode = () => {
   const envNode = import.meta.env.VITE_DEFAULT_SELECT_NODES;
   if (envNode) {
@@ -40,7 +39,6 @@ class VMApiService {
     });
   }
 
-  // Обновление конфигурации
   updateConfig(newConfig: Partial<typeof DEFAULT_CONFIG>) {
     this.config = { ...this.config, ...newConfig };
     this.client = axios.create({
@@ -53,7 +51,6 @@ class VMApiService {
     });
   }
 
-  // Выполнение запроса к vmselect
   private async queryNode(endpoint: string, params: Record<string, any> = {}) {
     try {
       const response = await this.client.get(endpoint, { params });
@@ -64,7 +61,6 @@ class VMApiService {
     }
   }
 
-  // Выполнение PromQL/MetricsQL запроса
   async query(query: string, time?: string): Promise<VMQueryResult> {
     const params: Record<string, any> = { query };
     if (time) {
@@ -73,7 +69,6 @@ class VMApiService {
     return this.queryNode('/api/v1/query', params);
   }
 
-  // Выполнение запроса с временным диапазоном
   async queryRange(query: string, timeRange: TimeRange): Promise<VMQueryResult> {
     const params = {
       query,
@@ -84,7 +79,6 @@ class VMApiService {
     return this.queryNode('/api/v1/query_range', params);
   }
 
-  // Получение списка серий
   async getSeries(match: string[] = []): Promise<VMSeriesResult> {
     const params: Record<string, any> = {};
     if (match.length > 0) {
@@ -93,7 +87,6 @@ class VMApiService {
     return this.queryNode('/api/v1/series', params);
   }
 
-  // Получение списка лейблов
   async getLabels(match: string[] = []): Promise<VMLabelsResult> {
     const params: Record<string, any> = {};
     if (match.length > 0) {
@@ -102,7 +95,6 @@ class VMApiService {
     return this.queryNode('/api/v1/labels', params);
   }
 
-  // Получение значений лейбла
   async getLabelValues(labelName: string, match: string[] = []): Promise<VMLabelValuesResult> {
     const params: Record<string, any> = {};
     if (match.length > 0) {
@@ -111,7 +103,6 @@ class VMApiService {
     return this.queryNode(`/api/v1/label/${labelName}/values`, params);
   }
 
-  // Получение списка метрик
   async getMetrics(): Promise<string[]> {
     try {
       const series = await this.getSeries();
@@ -130,7 +121,6 @@ class VMApiService {
     }
   }
 
-  // Проверка здоровья vmselect
   async healthCheck(): Promise<{ node: string; status: string; error?: string }[]> {
     try {
       await this.client.get('/health');

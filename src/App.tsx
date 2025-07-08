@@ -15,7 +15,7 @@ const LOCALSTORAGE_USE_TIMERANGE_KEY = 'vmui_use_time_range';
 function App() {
   const [query, setQuery] = useState('up');
   const [timeRange, setTimeRange] = useState<TimeRange>({
-    start: new Date(Date.now() - 3600000).toISOString(), // 1 час назад
+    start: new Date(Date.now() - 3600000).toISOString(),
     end: new Date().toISOString(),
     step: '15s'
   });
@@ -35,7 +35,6 @@ function App() {
   const [selectNode, setSelectNode] = useState<string>(() => localStorage.getItem(LOCALSTORAGE_NODE_KEY) || 'http://localhost:8481');
   const [accountID, setAccountID] = useState<string>(() => localStorage.getItem(LOCALSTORAGE_ACCOUNT_KEY) || '0');
 
-  // Переключение темной темы и сохранение в localStorage
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -46,12 +45,10 @@ function App() {
     }
   }, [darkMode]);
 
-  // Обновление vmApi при смене selectNode или accountID
   useEffect(() => {
     vmApi.updateConfig({ selectNode, accountID });
   }, [selectNode, accountID]);
 
-  // Сохраняем выбор чекбокса в localStorage
   useEffect(() => {
     localStorage.setItem(LOCALSTORAGE_USE_TIMERANGE_KEY, useTimeRange ? 'true' : 'false');
   }, [useTimeRange]);
@@ -76,7 +73,7 @@ function App() {
         timestamp: Date.now(),
         timeRange: useTimeRange && timeRange.start && timeRange.end ? timeRange : undefined
       };
-      setHistory(prev => [historyItem, ...prev.slice(0, 9)]); // Храним последние 10 запросов
+      setHistory(prev => [historyItem, ...prev.slice(0, 9)]);
     } catch (error: any) {
       setError(error.message || 'Ошибка выполнения запроса');
       setResults(null);
@@ -94,7 +91,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-      {/* Header */}
       <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -125,9 +121,7 @@ function App() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Левая панель */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Редактор запросов */}
             <div className="card p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
                 Запрос
@@ -139,7 +133,6 @@ function App() {
                 loading={loading}
               />
             </div>
-            {/* Временной диапазон */}
             <div className="card p-6">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
                 <Clock className="h-5 w-5 mr-2" />
@@ -152,7 +145,6 @@ function App() {
                 onUseTimeRangeChange={setUseTimeRange}
               />
             </div>
-            {/* История запросов */}
             {history.length > 0 && (
               <div className="card p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
@@ -175,9 +167,7 @@ function App() {
               </div>
             )}
           </div>
-          {/* Основная область */}
           <div className="lg:col-span-3">
-            {/* Кнопка выполнения */}
             <div className="mb-6">
               <button
                 onClick={executeQuery}
@@ -188,7 +178,6 @@ function App() {
                 <span>{loading ? 'Выполняется...' : 'Выполнить'}</span>
               </button>
             </div>
-            {/* Результаты */}
             <div className="card p-6">
               <ResultsViewer
                 results={results}
@@ -199,7 +188,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/* Модальное окно настроек */}
       {showConfig && (
         <ConfigModal
           onClose={() => setShowConfig(false)}

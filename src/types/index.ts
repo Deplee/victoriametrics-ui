@@ -1,4 +1,3 @@
-// Victoria Metrics API типы
 export interface VMQueryResult {
   status: 'success' | 'error';
   data?: {
@@ -35,7 +34,6 @@ export interface VMLabelValuesResult {
   error?: string;
 }
 
-// Конфигурация приложения
 export interface VMConfig {
   selectNode: string;
   accountID: string;
@@ -50,7 +48,6 @@ export interface TimeRange {
   step: string;
 }
 
-// Состояние приложения
 export interface AppState {
   query: string;
   timeRange: TimeRange;
@@ -69,7 +66,6 @@ export interface QueryHistory {
   timeRange?: TimeRange;
 }
 
-// Компоненты
 export interface QueryEditorProps {
   query: string;
   onQueryChange: (query: string) => void;

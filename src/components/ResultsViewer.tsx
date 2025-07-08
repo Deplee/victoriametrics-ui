@@ -83,15 +83,14 @@ const ResultsViewer: React.FC<ResultsViewerProps> = ({
 
   const { resultType, result } = results.data;
 
-  // Подготовка данных для графика
   const prepareChartData = () => {
     if (resultType === 'matrix') {
-      return result.map((series, index) => ({
-        label: formatSeriesLabel(series),
-        data: series.values?.map(([timestamp, value]) => ({
-          x: timestamp * 1000, // Конвертируем в миллисекунды
-          y: parseFloat(value)
-        })) || [],
+              return result.map((series, index) => ({
+          label: formatSeriesLabel(series),
+          data: series.values?.map(([timestamp, value]) => ({
+            x: timestamp * 1000,
+            y: parseFloat(value)
+          })) || [],
         borderColor: `hsl(${(index * 137.5) % 360}, 70%, 50%)`,
         backgroundColor: `hsla(${(index * 137.5) % 360}, 70%, 50%, 0.1)`,
         tension: 0.1
@@ -173,7 +172,6 @@ const ResultsViewer: React.FC<ResultsViewerProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
           <h3 className="text-blue-800 dark:text-blue-200 text-sm font-medium">Тип результата</h3>
@@ -191,14 +189,12 @@ const ResultsViewer: React.FC<ResultsViewerProps> = ({
         </div>
       </div>
 
-      {/* График */}
       <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <div className="h-96">
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
 
-      {/* Таблица данных */}
       <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Данные</h3>

@@ -55,7 +55,6 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Переключатель использования временного диапазона */}
       <div className="flex items-center space-x-2">
         <input
           type="checkbox"
@@ -71,7 +70,6 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
 
       {useTimeRange && (
         <>
-          {/* Быстрые диапазоны */}
           <div>
             <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Быстрые диапазоны:
@@ -89,7 +87,6 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
             </div>
           </div>
 
-          {/* Ручной ввод */}
           <div className="space-y-3">
             <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Ручной ввод:

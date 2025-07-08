@@ -45,7 +45,6 @@ const ConfigModal: React.FC<ConfigModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Адрес vmselect */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Адрес vmselect:
@@ -60,7 +59,6 @@ const ConfigModal: React.FC<ConfigModalProps> = ({
             />
           </div>
 
-          {/* AccountID */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               AccountID:
@@ -75,7 +73,6 @@ const ConfigModal: React.FC<ConfigModalProps> = ({
             />
           </div>
 
-          {/* Timeout */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Timeout (мс):
@@ -91,7 +88,6 @@ const ConfigModal: React.FC<ConfigModalProps> = ({
             />
           </div>
 
-          {/* Кнопки */}
           <div className="flex justify-end space-x-3">
             <button
               type="button"

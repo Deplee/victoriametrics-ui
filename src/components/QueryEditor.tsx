@@ -45,12 +45,10 @@ const QueryEditor: React.FC<QueryEditorProps> = ({
         />
       </div>
 
-      {/* Горячие клавиши */}
       <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
         Ctrl+Enter для выполнения запроса
       </div>
 
-      {/* Быстрые запросы */}
       <div className="mt-4">
         <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Быстрые запросы:
